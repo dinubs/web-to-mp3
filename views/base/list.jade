@@ -1,0 +1,11 @@
+extends ../layouts/application
+
+block content
+  .wrap.audio-content
+    - i = 0
+    - each file in pods
+      .audio-click(data-id=i)
+        i.fa.fa-play-circle-o
+        span=file
+      - i++
+

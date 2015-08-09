@@ -1,0 +1,9 @@
+extends ../layouts/application
+
+block content
+  header
+    .wrap
+      p Enter the URL to an article and get it in an mp3.
+      form(method='GET' action='/get')
+        input(name='url' type='url' required id='url' autocomplete='off' placeholder='http://')
+        button(type='submit') Search

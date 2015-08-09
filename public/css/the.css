@@ -1,0 +1,213 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  position: relative; }
+
+html {
+  height: 100%; }
+
+.wrap {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .wrap::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+article {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%;
+  background-color: #fff;
+  padding: 30px 40px; }
+  article:last-child {
+    margin-right: 0; }
+
+body {
+  background-color: #ddd;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: 150px; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  line-height: 1.1; }
+
+h1 {
+  font-size: 36px; }
+
+a {
+  color: #ea6045;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #000;
+  z-index: 9999;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5); }
+  nav .wrap {
+    background-color: transparent;
+    padding: 0; }
+  nav .logo {
+    letter-spacing: 2px;
+    font-size: 20px; }
+  nav a {
+    padding: 0 15px;
+    line-height: 64px;
+    color: #fff;
+    display: inline-block;
+    border-bottom: 1px solid transparent; }
+    nav a:after {
+      content: '';
+      width: 100%;
+      height: 3px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-color: transparent;
+      border-radius: 1px;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s; }
+    nav a:hover:after, nav a.active:after {
+      background-color: black; }
+  nav ul {
+    list-style: none;
+    float: right; }
+    nav ul li {
+      display: inline-block; }
+
+button {
+  background-color: #ea6045;
+  cursor: pointer;
+  border: 1px solid #e74c2e;
+  color: #fff;
+  padding: 10px;
+  min-width: 100px;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  outline: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+  button:hover {
+    background-color: #e74c2e; }
+  button:active {
+    background-color: #e23a1a; }
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  max-width: 320px;
+  width: calc(100% - 20px);
+  outline: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+  input:focus {
+    border: 1px solid gray; }
+
+p {
+  letter-spacing: 1px;
+  margin: 10px 0;
+  line-height: 24px; }
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://static.pexels.com/photos/1784/apple-laptop-macbook-pro-notebook-large.jpg);
+  background-size: cover;
+  color: #fff;
+  background-position: center;
+  height: calc(100% + 150px);
+  margin-top: -150px; }
+  header .wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    background-color: none;
+    padding: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+
+.audio-content {
+  background-color: #e6e6e6;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%;
+  margin-left: 17.05961%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  color: #1a1a1a; }
+  .audio-content:last-child {
+    margin-right: 0; }
+  @media (max-width: 720px) {
+    .audio-content {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 100%;
+      margin-left: 0%; }
+      .audio-content:last-child {
+        margin-right: 0; } }
+  .audio-content .audio-click {
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: 1px solid #cccccc;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    line-height: 32px; }
+    .audio-content .audio-click:hover {
+      background-color: #d9d9d9; }
+    .audio-content .audio-click:active, .audio-content .audio-click.active {
+      background-color: #cccccc; }
+    .audio-content .audio-click i {
+      font-size: 32px;
+      vertical-align: middle;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin: 0 10px; }
+    .audio-content .audio-click span {
+      margin-left: 50px;
+      width: calc(100% - 50px);
+      display: inline-block; }
+
+/*# sourceMappingURL=the.css.map */
