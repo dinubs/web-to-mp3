@@ -2,32 +2,35 @@ var request = require('request');
 var fs = require('fs');
 var async = require('async');
 
-var googleTranslateUrl = 'https://translate.google.com/translate_tts?tl=en&client=t&q=';
+var googleTranslateUrl = 'http://api.microsofttranslator.com/v2/http.svc/speak?appId=TeCJ_oRITdC6_LOfZI8BO0ajp8gjEGWBjO13Oszwifuw*&language=en-US&format=audio/mp3&options=MinSize|male&text=';
 
 var Podcaster = {
   convertStringToAudio: function(text, directory, cb) {
-    var strings = text.split(' ');
-    var i = 0, l = strings.length;
-    var compiledStrings = [];
-    var currentString = '';
+    text = text.split(' ');
+    var i = 0, l = text.length;
     for (; i < l; i++) {
-      currentString += strings[i] + ' ';
-      if (i % 12 === 0 && i !== 0) {
-        compiledStrings.push(currentString);
-        currentString = '';
+      if (parseInt(text[i])) {
+        text[i] = text[i].replace(/,/g, '');
       }
+      if (text[i].match(/^\$[0-9]/)) {
+        text[i] = text[i].replace('$', '');
+        text[i] += ' dollars';
+        console.log(text[i]);
+      }
+
+      if (text[i].indexOf('bn') > -1) {
+        text[i] = text[i].replace('bn', ' billion');
+      }
+
     }
-    compiledStrings.push(currentString);
+    text = text.join(' ');
     
     console.log(googleTranslateUrl + text);
-    i = 0;
-    async.eachSeries(compiledStrings, function(item, callback) {
+    async.eachSeries([1], function(item, callback) {
       try {
-        request.get(googleTranslateUrl + item).on('end', function() {
-          console.log(i);
-          i++;
+        request.get(googleTranslateUrl + text).on('end', function() {
           callback(null);
-        }).pipe(fs.createWriteStream(directory + '/' + i + '.mp3'));
+        }).pipe(fs.createWriteStream(directory + '/' + 0 + '.mp3'));
       } catch (e) {
         
       }
