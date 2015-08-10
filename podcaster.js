@@ -27,14 +27,21 @@ var Podcaster = {
       }
 
     }
-    text = text.join(' ');
+    text = encodeURIComponent(text.join(' '));
     
-    console.log(googleTranslateUrl + text);
     async.eachSeries([1], function(item, callback) {
       try {
-        request.get(googleTranslateUrl + text).on('end', function() {
+        request.get(googleTranslateUrl + text).on('error', function(e) {
+          console.log(e);
+        }).on('response', function(response) {
+          if (response.statusCode !== 200) {
+            console.log(googleTranslateUrl + text);
+            console.log(response.statusCode) // 200 
+            console.log(response.statusMessage); // 'image/png' 
+          }
+        }).on('end', function() {
           callback(null);
-        }).pipe(fs.createWriteStream(directory + '/' + 0 + '.mp3'));
+        }).pipe(fs.createWriteStream(directory + '/0.mp3'));
       } catch (e) {
         console.log('Error: ' + e);
       }
@@ -66,27 +73,31 @@ var Podcaster = {
     
       var dir = './audios/' + identifier + '/';
       var files = fs.readdirSync(dir);
-      var innerFiles = []
-      files.forEach(function(file) {
-        innerFiles.push(fs.readdirSync(dir + file));
-      });
-      
-      console.log(innerFiles);
       
       var finishedMp3 = fs.createWriteStream(dir + '/done.mp3');
       
       var i = 0;
+
+      files = files.map(function(file) {
+        return parseInt(file);
+      });
+
+      files = files.sort(function(a, b) {
+        return a - b;
+      });
+
       async.eachSeries(files, function(item, callback) {
 
         var currentFile = dir + item + '/0.mp3';
           console.log(currentFile);
           fs.exists(currentFile, function(exists) {
             if (!exists) {
-              return cb(null);
+              return callback(null);
             }
             var stream = fs.createReadStream(currentFile);
             stream.pipe(finishedMp3, {end: false});
             stream.on('end', function() {
+              console.log('Appended file!');
               return callback(null);
             });
           });
