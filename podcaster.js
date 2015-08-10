@@ -18,6 +18,10 @@ var Podcaster = {
         console.log(text[i]);
       }
 
+      if (text[i].match(/[0-9]m/g)) {
+        text[i] = text[i].replace('m', ' million');
+      }
+
       if (text[i].indexOf('bn') > -1) {
         text[i] = text[i].replace('bn', ' billion');
       }
@@ -32,7 +36,7 @@ var Podcaster = {
           callback(null);
         }).pipe(fs.createWriteStream(directory + '/' + 0 + '.mp3'));
       } catch (e) {
-        
+        console.log('Error: ' + e);
       }
     }, function done() {
       cb(directory);
@@ -72,18 +76,9 @@ var Podcaster = {
       var finishedMp3 = fs.createWriteStream(dir + '/done.mp3');
       
       var i = 0;
-      async.eachSeries(innerFiles, function(item, callback) {
-        item = item.map(function(obj) {
-          return parseInt(obj);
-        });
-        
-        item.sort(function(a, b) {
-          return a - b;
-        });
-        
-        async.eachSeries(item, function(file, cb) {
-          
-          var currentFile = dir + i + '/' + file + '.mp3';
+      async.eachSeries(files, function(item, callback) {
+
+        var currentFile = dir + item + '/0.mp3';
           console.log(currentFile);
           fs.exists(currentFile, function(exists) {
             if (!exists) {
@@ -92,14 +87,10 @@ var Podcaster = {
             var stream = fs.createReadStream(currentFile);
             stream.pipe(finishedMp3, {end: false});
             stream.on('end', function() {
-              return cb(null);
+              return callback(null);
             });
-          })
-
-        }, function() {
-          i++;
-          callback(null);
-        })
+          });
+        
       }, function done() {
         finishedMp3.close();
         console.log('done');
