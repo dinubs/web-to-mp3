@@ -2,7 +2,7 @@ var request = require('request');
 var fs = require('fs');
 var async = require('async');
 
-var googleTranslateUrl = 'http://api.microsofttranslator.com/v2/http.svc/speak?appId=TeCJ_oRITdC6_LOfZI8BO0ajp8gjEGWBjO13Oszwifuw*&language=en-US&format=audio/mp3&options=MinSize|male&text=';
+var googleTranslateUrl = 'http://api.microsofttranslator.com/v2/http.svc/speak?appId=TnQHLIpt7D5zHrL1CuaA946gDvqTxnCCrXIFK20E2I5I*&language=en-US&format=audio/mp3&options=MinSize|male&text=';
 
 var Podcaster = {
   convertStringToAudio: function(text, directory, cb) {
@@ -78,11 +78,16 @@ var Podcaster = {
       
       var i = 0;
 
+      fs.exists(dir + '/.DS_Store', function(exists) {
+        fs.unlinkSync(dir + '/.DS_Store');
+      });
+
       files = files.map(function(file) {
         return parseInt(file);
       });
 
       files = files.sort(function(a, b) {
+        console.log(a, b);
         return a - b;
       });
 
